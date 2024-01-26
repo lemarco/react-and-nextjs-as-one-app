@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  reverse_proxy:
+    container_name: ${REVERSE_PROXY_HOST_NAME}
+    restart: always
+    image: nginx:1.25.2-alpine
+    volumes:
+      - ${PWD}/configs/nginx/nginx.dev.server.conf.template:/etc/nginx/templates/nginx.dev.server.conf.template:rw,cached
+      - ${PWD}/configs/nginx/nginx.dev.http.conf:/etc/nginx/nginx.conf
+      - ${PWD}/logs/nginx/:/var/log/nginx
+
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - .env
