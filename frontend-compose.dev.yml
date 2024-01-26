@@ -2,14 +2,19 @@ version: "3.9"
 
 services:
   blog-app:
-    container_name: ${PUBLIC_FRONTEND_MAIN_APP_HOST}
+    container_name: ${PUBLIC_FRONTEND_BLOG_APP_HOST}
     build:
       dockerfile: ./frontend/apps/blog/.dockerfile
     ports:
-      - "${PUBLIC_FRONTEND_BLOG_APP_PORT}:3000"
+      - "${PUBLIC_FRONTEND_BLOG_APP_PORT}:${PUBLIC_FRONTEND_BLOG_APP_PORT}"
     volumes:
       - "./frontend/apps/blog/app:/app/frontend/apps/blog/app"
+      - "./frontend/apps/blog/components:/app/frontend/apps/blog/components"
       - "./frontend/apps/blog/public:/app/frontend/apps/blog/public"
+      - "./frontend/apps/blog/services:/app/frontend/apps/blog/services"
+      - "./frontend/apps/blog/utils:/app/frontend/apps/blog/utils"
+      - "./frontend/apps/blog/widgets:/app/frontend/apps/blog/widgets"
+      - "./frontend/apps/blog/middleware.ts:/app/frontend/apps/blog/middleware.ts"
       # - "./frontend/apps/main/components:/app/frontend/apps/main/components"
       # - "./frontend/apps/main/context:/app/frontend/apps/main/context"
       # - "./frontend/apps/main/data:/app/frontend/apps/main/data"
@@ -23,7 +28,7 @@ services:
     build:
       dockerfile: ./frontend/apps/platform/.dockerfile
     ports:
-      - "${PUBLIC_FRONTEND_PLATFORM_APP_PORT}:5173"
+      - "${PUBLIC_FRONTEND_PLATFORM_APP_PORT}:${PUBLIC_FRONTEND_PLATFORM_APP_PORT}"
     volumes:
       - "./frontend/apps/platform/src:/app/frontend/apps/platform/src"
       - "./frontend/apps/platform/public:/app/frontend/apps/platform/public"

@@ -14,4 +14,4 @@ COPY .env /app/.env
 RUN bun i 
 ENV PUBLIC_FRONTEND_PLATFORM_APP_PORT $PUBLIC_FRONTEND_PLATFORM_APP_PORT
 
-CMD ["bun", "run", "platform:dev"]
+CMD ["bun","--bun", "run", "platform:dev"]
